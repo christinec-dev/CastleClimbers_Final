@@ -6,5 +6,5 @@ extends ColorRect
 @onready var label = $Label
 
 # updates label text when signal is emitted
-func update_lives(lives):
+func update_lives(lives, max_lives):
 	label.text = str(lives)

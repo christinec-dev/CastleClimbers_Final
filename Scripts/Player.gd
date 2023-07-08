@@ -264,7 +264,7 @@ func take_damage():
 	#deduct and update lives    
 	if lives > 0 and Global.can_hurt == true:
 		lives = lives - 1
-		update_lives.emit(lives)
+		update_lives.emit(lives, max_lives)
 		#play damage animation
 		$AnimatedSprite2D.play("damage")
 		#allows animation to play
