@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=3 uid="uid://durbt8m5vo1dn"]
+
+[ext_resource type="Script" path="res://Scripts/Box.gd" id="1_uj08a"]
+[ext_resource type="Texture2D" uid="uid://bcb10ey5ggvu2" path="res://Assets/Kings and Pigs/Sprites/08-Box/Hit.png" id="2_0tfhv"]
+[ext_resource type="Texture2D" uid="uid://cemaj8suex6by" path="res://Assets/Particles/9/1_9.png" id="2_yu0sx"]
+[ext_resource type="Texture2D" uid="uid://cwb88dltum2ut" path="res://Assets/Kings and Pigs/Sprites/08-Box/Idle.png" id="3_a2wy0"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k3hni"]
+lifetime_randomness = 0.1
+emission_shape = 3
+emission_box_extents = Vector3(5, 4, 1)
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_max = 1.5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iv251"]
+radius = 7.07107
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7bts"]
+atlas = ExtResource("2_0tfhv")
+region = Rect2(0, 0, 22, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tux1g"]
+atlas = ExtResource("3_a2wy0")
+region = Rect2(0, 0, 22, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hyadn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q7bts")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tux1g")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 1.0
+}]
+
+[node name="Box" type="Area2D"]
+script = ExtResource("1_uj08a")
+
+[node name="Effects" type="Node2D" parent="."]
+
+[node name="ThrowingParticle" type="GPUParticles2D" parent="Effects"]
+modulate = Color(1, 1, 1, 0.0980392)
+position = Vector2(-8, 1)
+process_material = SubResource("ParticleProcessMaterial_k3hni")
+texture = ExtResource("2_yu0sx")
+speed_scale = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_iv251")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hyadn")
+animation = &"moving"
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=3 uid="uid://h3ditf6dxkds"]
+
+[ext_resource type="Script" path="res://Scripts/BombSpawner.gd" id="1_5mwt0"]
+[ext_resource type="Texture2D" uid="uid://chcj1yvbhw63d" path="res://Assets/Kings and Pigs/Sprites/10-Cannon/Shoot (44x28).png" id="1_j52pt"]
+[ext_resource type="Texture2D" uid="uid://01kyoh03sgx3" path="res://Assets/Kings and Pigs/Sprites/10-Cannon/Idle.png" id="2_ia08g"]
+[ext_resource type="PackedScene" uid="uid://bnnyjxf2pwcn0" path="res://Scenes/CannonHandler.tscn" id="4_l6jfr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20172"]
+atlas = ExtResource("1_j52pt")
+region = Rect2(0, 0, 44, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q1qak"]
+atlas = ExtResource("1_j52pt")
+region = Rect2(44, 0, 44, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kygjk"]
+atlas = ExtResource("1_j52pt")
+region = Rect2(88, 0, 44, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbafu"]
+atlas = ExtResource("1_j52pt")
+region = Rect2(132, 0, 44, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6biyd"]
+atlas = ExtResource("1_j52pt")
+region = Rect2(0, 0, 44, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vp6wc"]
+atlas = ExtResource("2_ia08g")
+region = Rect2(0, 0, 44, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ks8s5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_20172")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q1qak")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kygjk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbafu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6biyd")
+}],
+"loop": false,
+"name": &"cannon_fired",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vp6wc")
+}],
+"loop": true,
+"name": &"cannon_idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gcxrs"]
+size = Vector2(62, 30)
+
+[node name="BombSpawner" type="Node2D"]
+script = ExtResource("1_5mwt0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ks8s5")
+animation = &"cannon_fired"
+flip_h = true
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="CannonHandler" parent="." instance=ExtResource("4_l6jfr")]
+position = Vector2(-41, -5)
+
+[node name="Collisions" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions"]
+position = Vector2(-31, -4)
+shape = SubResource("RectangleShape2D_gcxrs")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

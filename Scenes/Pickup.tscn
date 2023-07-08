@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://da5f5pts28jnr"]
+
+[ext_resource type="Script" path="res://Scripts/Pickup.gd" id="1_dq0mt"]
+[ext_resource type="Texture2D" uid="uid://cnfhbpwvf1vhv" path="res://Assets/lightning bolt/lightning bolt/sprite_0.png" id="2_rnm6n"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j3f7r"]
+
+[node name="Pickup" type="Area2D"]
+script = ExtResource("1_dq0mt")
+pickup = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_j3f7r")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4, -2)
+texture = ExtResource("2_rnm6n")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
