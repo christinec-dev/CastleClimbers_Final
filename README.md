@@ -5,7 +5,7 @@ The complete source code for the Castle Climbers game, which is a 2D Platform ga
 
 
 ## Project Preview Video
-You can watch the preview video that showcases our end-product here:
+You can watch the preview video that showcases our end-product here: https://youtu.be/mAMS5SuV6gA
 
 ## Project Overview
 This game is a Donkey-Kong inspired 2D Platformer that includes the following:
