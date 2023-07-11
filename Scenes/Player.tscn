@@ -972,6 +972,15 @@ limit_bottom = 705
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
 
+[node name="Camera2D2" type="Camera2D" parent="."]
+enabled = false
+zoom = Vector2(3, 3)
+limit_left = -17
+limit_top = -16
+limit_right = 1168
+limit_bottom = 656
+position_smoothing_speed = 2.0
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 process_mode = 3
 libraries = {
@@ -1780,6 +1789,7 @@ wait_time = 1000.0
 
 [node name="ScoreRayCast" type="RayCast2D" parent="."]
 position = Vector2(-5, 0)
+target_position = Vector2(0, 100)
 collide_with_areas = true
 
 [node name="Music" type="Node2D" parent="."]

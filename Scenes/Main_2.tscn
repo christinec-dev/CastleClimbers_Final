@@ -2118,11 +2118,11 @@ wait_time_at_bottom = 2.0
 
 [node name="Platform3" parent="Platforms" instance=ExtResource("5_skpxs")]
 position = Vector2(656, 320)
-movement_range = 65
+movement_range = 57
 
 [node name="Platform5" parent="Platforms" instance=ExtResource("5_skpxs")]
 position = Vector2(592, 320)
-movement_range = 65
+movement_range = 57
 
 [node name="Platform4" parent="Platforms" instance=ExtResource("5_skpxs")]
 position = Vector2(436, 144)

@@ -28,7 +28,7 @@ var attack_time_left = 0
 var score = 0
 
 #time we started the level
-var level_start_time = Time.get_ticks_msec()
+var level_start_time 
 
 #level value
 @onready var level = get_node_or_null("UI/Level/Value")
@@ -46,12 +46,15 @@ func _ready():
 	#show our correct lives value on load
 	$UI/Health/Label.text = str(lives)
 	update_level_label()
+	
 	#show instructions
 	if Global.get_current_level_number() == 1:
 		#stop processing
 		set_process(false)
 		$Instructions.visible = true
-
+	else:
+		level_start_time = Time.get_ticks_msec()
+		
 	#play background music
 	$Music/BackgroundMusic.play()
 	
@@ -99,6 +102,7 @@ func _physics_process(delta):
 
 		# Check if target is valid and player is not damaged
 		if target != null:
+			print(target)
 			if target.name == "Box" or target.name == "Bomb":
 				if is_hurt == false:
 					increase_score(1)
@@ -404,4 +408,5 @@ func _on_accept_button_pressed():
 	$Instructions.visible = false
 	#unpause game
 	get_tree().paused = false
-	set_process(true)
+	set_process(true) 
+	level_start_time = Time.get_ticks_msec()
